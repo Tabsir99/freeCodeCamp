@@ -6,9 +6,7 @@ This repository contains my personal projects completed as part of various freeC
 
 This repo includes projects from the following freeCodeCamp courses (to be updated as I progress):
 
-- [Course Name 1]
-- [Course Name 2]
-- [Course Name 3]
+- 
 
 Each project is stored in its own directory with relevant files and documentation.
 
