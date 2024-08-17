@@ -6,7 +6,8 @@ This repository contains my personal projects completed as part of various freeC
 
 This repo includes projects from the following freeCodeCamp courses (to be updated as I progress):
 
-- 
+- Relational Database Certification
+-
 
 Each project is stored in its own directory with relevant files and documentation.
 
