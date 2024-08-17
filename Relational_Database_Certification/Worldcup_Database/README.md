@@ -24,7 +24,7 @@ This project, built for the freeCodeCamp RDS certificate, manages data about the
     ```
 2. Navigate to the project directory:
     ```bash
-    cd Worldcup_Database
+    cd freeCodeCamp/Relational_Database_Certification/Worldcup_database
     ```
 3. Create a database named `worldcup` in your preferred relational database management system (e.g., PostgreSQL, MySQL).
 4. Import the database schema and data using the provided `worldcup.sql` and `insert_data.sh` files:
