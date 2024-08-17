@@ -8,6 +8,15 @@
             "name": "whatever",
             "database": "universe",
             "username": "tabsir"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "worldcup",
+            "database": "worldcup",
+            "username": "tabsir"
         }
     ]
 }

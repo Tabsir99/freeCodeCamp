@@ -27,11 +27,11 @@ This project involves creating a comprehensive database named `universe` to cata
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Tabsir99/freeCodeCamp.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd <project-directory>
+    cd freeCodeCamp/Relational_Database_Certification/Celestial_Bodies_Database
     ```
 3. Manually create a database named `universe` in your preferred relational database management system (e.g., PostgreSQL, MySQL).
 4. Import the database schema and data using the provided `universe.sql` file:
