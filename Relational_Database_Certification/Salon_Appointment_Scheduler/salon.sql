@@ -1,8 +1,3 @@
-
--- DROP TABLE appointments;
--- DROP TABLE customers;
--- DROP TABLE services;
-
 CREATE TABLE IF NOT EXISTS customers (
     customer_id SERIAL PRIMARY KEY,
     name VARCHAR(80) NOT NULL,

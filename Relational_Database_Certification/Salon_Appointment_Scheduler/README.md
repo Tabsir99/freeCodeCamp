@@ -27,7 +27,7 @@ The Salon Appointment Scheduler is a bash script that simulates a salon appointm
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/salon-appointment-scheduler.git
+   git clone https://github.com/Tabsir99/freeCodeCamp.git
    ```
 
 2. Navigate to the project directory:
