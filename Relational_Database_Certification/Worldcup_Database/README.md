@@ -26,16 +26,16 @@ This project, built for the freeCodeCamp RDS certificate, manages data about the
     ```bash
     cd freeCodeCamp/Relational_Database_Certification/Worldcup_database
     ```
-3. Create a database named `worldcup` in your preferred relational database management system (e.g., PostgreSQL, MySQL).
+3. Create a user named `freecodecamp` and database named `worldcup` in your preferred relational database management system (e.g., PostgreSQL, MySQL).
 4. Import the database schema and data using the provided `worldcup.sql` and `insert_data.sh` files:
     - For PostgreSQL:
       ```bash
-      psql -U your_username -d worldcup -f worldcup.sql
+      psql -U freecodecamp -d worldcup -f worldcup.sql
       sh insert_data.sh
       ```
     - For MySQL:
       ```bash
-      mysql -u your_username -p worldcup < worldcup.sql
+      mysql -u freecodecamp -p worldcup < worldcup.sql
       sh insert_data.sh
       ```
 

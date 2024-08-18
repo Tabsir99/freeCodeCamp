@@ -18,7 +18,7 @@ The Periodic Table Database is a bash script that interacts with a PostgreSQL da
 ### Prerequisites
 
 - Bash shell
-- PostgreSQL database
+- PostgreSQL database user named `freecodecamp` and database named `preiodic_table`
 - `psql` command-line tool
 
 

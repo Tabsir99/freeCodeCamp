@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PSQL="psql -U tabsir -d salon -A -t -c"
+PSQL="psql -U freecodecamp -d salon -A -t -c"
 
 # More permissive regex for US phone numbers
 PHONE_REGEX="^(1[-.\s]?)?(\+?1[-.\s]?)?((\([0-9]{3}\))|[0-9]{3})[-.\s]?[0-9]{3}[-.\s]?[0-9]{4}$"

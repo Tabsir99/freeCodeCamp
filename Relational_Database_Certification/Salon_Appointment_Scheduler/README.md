@@ -44,17 +44,17 @@ The Salon Appointment Scheduler is a bash script that simulates a salon appointm
 
 4. Set up the PostgreSQL or MySQL database:
 
-   - Manually create a database named `salon` in your preferred database management system.
+   - Manually create a user named `freecodecamp` and database named `salon` in your preferred database management system.
    - Connect to your database:
 
      - For PostgreSQL:
        ```bash
-       psql -U your_username -d salon
+       psql -U freecodecamp -d salon
        ```
      - For MySQL:
 
        ```bash
-       mysql -u your_username -p salon
+       mysql -u freecodecamp -p salon
        ```
 
    - Execute the provided `setup.sql` file to create the necessary tables and populate the `services` table:

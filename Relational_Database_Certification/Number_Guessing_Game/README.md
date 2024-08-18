@@ -28,13 +28,13 @@ The Number Guessing Game is a bash script that challenges users to guess a rando
 1. Clone the repository:
 
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/Tabsir99/freeCodeCamp.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd project/number_guessing_game
+    cd freeCodeCamp/Relational_Database_Certification/Number_Guessing_Game
     ```
 
 3. Make the script executable:
@@ -45,7 +45,7 @@ The Number Guessing Game is a bash script that challenges users to guess a rando
 
 4. Ensure the PostgreSQL database is set up with the required table:
 
-    - Manually create a database named `number_guess` in your PostgreSQL server.
+    - Manually create a user named `freecodecamp` and database named `number_guess` in your PostgreSQL server.
 
     - Connect to your database:
 
