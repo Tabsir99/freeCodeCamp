@@ -47,7 +47,7 @@ The Timestamp Microservice is an API built with Express.js that provides a simpl
  ```bash
     npm start
 ```
-    The server will be running on http://localhost:3001.
+The server will be running on http://localhost:3001.
 
 ### Usage
 - **Testing the API**:
