@@ -31,21 +31,22 @@ The Timestamp Microservice is an API built with Express.js that provides a simpl
 ### Installation
 
 1. **Clone the Repository**:
-2. ```bash
+ ```bash
     git clone https://github.com/Tabsir99/freeCodeCamp.git
-    ```
-3. **Navigate to the Project Directory**:
-4. ```bash
+
+```
+2. **Navigate to the Project Directory**:
+ ```bash
     cd freeCodeCamp/Backend_Developments_and_API/Timestamp_Microservices
    ```
-5. **Install Dependencies**:
-6. ```bash
+ 3. **Install Dependencies**:
+ ```bash
     npm install
    ```
-7. **Start the Server**:
-8. ```bash
+ 4. **Start the Server**:
+ ```bash
     npm start
-   ```
+```
     The server will be running on http://localhost:3001.
 
 ### Usage
