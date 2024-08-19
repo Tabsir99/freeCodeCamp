@@ -1,3 +1,7 @@
-temp.txt
+**/temp
 
 .vscode
+
+**/node_modules/
+
+**/.env
