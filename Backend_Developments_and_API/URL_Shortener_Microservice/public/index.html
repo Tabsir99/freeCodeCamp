@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #121212;
+        font-family: "Arial", sans-serif;
+        color: #ffffff;
+      }
+
+      .container {
+        text-align: center;
+        background-color: #1e1e1e;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 2em;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="url"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333333;
+        color: #ffffff;
+        font-size: 1em;
+        outline: none;
+        border: 2px solid transparent
+      }
+      input:focus{
+        border: 2px solid rgb(52, 157, 198)
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #005aea;
+        color: #ffffff;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0068b3;
+      }
+
+      #result {
+        margin-top: 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #short-url {
+        color: #03dac6;
+        text-decoration: none;
+      }
+
+      #short-url:hover {
+        text-decoration: underline;
+      }
+
+      .usecase {
+        margin-top: 50px;
+        text-align: left;
+        background-color: #292929;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      .usecase p {
+        margin: 0 0 10px 0;
+      }
+
+      .usecase a {
+        color: #03dac6;
+        text-decoration: none;
+      }
+
+      .usecase a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form id="shorten-form" action="/api/shorturl" method="post">
+        <input
+          type="url"
+          id="url-input"
+          placeholder="Enter your URL here..."
+          name="url"
+          required
+        />
+        <button type="submit">Shorten</button>
+      </form>
+      <div id="result" class="hidden">
+        <p>
+          Your shortened URL: <a id="short-url" href="#" target="_blank"></a>
+        </p>
+      </div>
+
+      <div class="usecase" style="line-height: 1.6;">
+        <h2>Example Use Case</h2>
+        <p>Enter <code style="font-size: 20px; border: 1px solid white; padding: 4px;">https://youtube.com</code></p>
+        <p>It will convert it into <code style="font-size: 20px;">1</code></p>
+        <p>So <a href="/api/shorturl/1">/api/shorturl/1</a> will redirect to:</p>
+        <p><strong>https://youtube.com</strong></p>
+      </div>
+    </div>
+  </body>
+</html>
