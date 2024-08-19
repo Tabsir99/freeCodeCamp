@@ -1,0 +1,31 @@
+{
+  "name": "timestamp_microservices",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "module": "es6",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+
+  "keywords": [
+    "microservices",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Nodemon",
+    "timestamp",
+    "backend",
+    "API"
+  ],
+  "author": "Tabsir CG",
+  "license": "MIT",
+  "description": "Timestamp Microservices is a Node.js project designed for FreeCodeCamp that provides an API for handling and converting dates. The service accepts a date parameter and returns a JSON object with either the Unix timestamp or UTC date string. It supports requests in various formats, including Unix timestamps and human-readable date strings. If the input date is invalid, it returns an error message. If no date is provided, it returns the current date and time. This project uses Express.js for server handling, MongoDB for potential future data storage, and Nodemon for development convenience.",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "nodemon": "^3.1.4"
+  }
+}
