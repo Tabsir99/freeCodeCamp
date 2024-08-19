@@ -30,15 +30,15 @@ The Timestamp Microservice is an API built with Express.js that provides a simpl
 
 ### Installation
 
-1. **Clone the Repository**:
-    git clone https://github.com/YourUsername/Timestamp_Microservice.git
-2. **Navigate to the Project Directory**:
-    cd Timestamp_Microservice
-3. **Install Dependencies**:
-    npm install
-4. **Start the Server**:
-    npm start
-    The server will be running on http://localhost:3000.
+1. **Clone the Repository**:```
+    git clone https://github.com/Tabsir99/freeCodeCamp.git ```
+2. **Navigate to the Project Directory**:```
+    cd freeCodeCamp/Backend_Developments_and_API/Timestamp_Microservices ```
+3. **Install Dependencies**:```
+    npm install ```
+4. **Start the Server**:```
+    npm start ```
+    The server will be running on http://localhost:3001.
 
 ### Usage
 - **Testing the API**:
