@@ -1,0 +1,30 @@
+{
+  "name": "header_parser_microservice",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "module": "es6",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "microservices",
+    "Node.js",
+    "Express",
+    "Nodemon",
+    "header-parser",
+    "backend",
+    "API"
+  ],
+  "author": "Tabsir CG",
+  "license": "MIT",
+  "description": "Header Parser Microservice is a Node.js project designed for FreeCodeCamp that provides an API for parsing and returning the client's IP address, language, and software information from the request headers. The service accepts requests to a specific endpoint and returns a JSON object containing the parsed data. This project uses Express.js for server handling and Nodemon for development convenience.",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "nodemon": "^3.1.4"
+  }
+}
