@@ -8,12 +8,13 @@ const app = express();
 
 app.set("trust proxy", true);
 
-app.use(express.json());
 app.use(
   cors({
-    origin: "https://www.freecodecamp.com",
+    origin: "https://www.freecodecamp.org",
   })
 );
+app.use(express.json());
+
 
 app.get("/", (req, res) => {
   res.send("Useless Home route... ");
