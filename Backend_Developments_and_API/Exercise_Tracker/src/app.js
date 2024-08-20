@@ -93,7 +93,7 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
     _id: _id,
     username: addExcercise.username,
     description: addExcercise.description,
-    duration: addExcercise.duration,
+    duration: Number(addExcercise.duration),
     date: addExcercise.date.toDateString(),
   });
 });
@@ -107,7 +107,7 @@ app.get("/api/users/:_id/logs", async (req, res) => {
   toDate = toDate ? new Date(toDate) : new Date();
 
 
-  const l = await collection.findOne(
+  const logs = await collection.findOne(
     {
       _id: new ObjectId(id),
     },
@@ -136,7 +136,20 @@ app.get("/api/users/:_id/logs", async (req, res) => {
     }
   );
 
-  res.json(l)
+  // Assuming 'logs' contains the fetched document
+  const transformedLogs = logs.log.map(entry => ({
+    ...entry,
+    date: entry.date.toDateString(), // Convert date to ISO string
+    duration: Number(entry.duration) // Convert duration to number
+  }));
+
+  const updateLogs = {
+    ...logs,
+    log: transformedLogs
+  }
+
+  res.json(updateLogs)
 });
+
 
 export default app;
