@@ -21,13 +21,13 @@ const validateUrl = (req, res, next) => {
   try {
     const urlObject = new URL(url);
     if (!['http:', 'https:'].includes(urlObject.protocol)) {
-      return res.json({ error: "Invalid URL protocol" });
+      return res.json({ error: "invalid url" });
     }
     req.urlHostname = urlObject.hostname
     next();
   } catch (error) {
     console.log(error)
-    return res.json({ error: "Invalid URL" });
+    return res.json({ error: "invalid url" });
   }
 };
 
@@ -61,7 +61,7 @@ app.post("/api/shorturl", validateUrl, async (req, res) => {
     );
 
     if (urlSaved) {
-      return res.json({ originalUrl: urlSaved.originalUrl, short_url: urlSaved.short_url });
+      return res.json({ original_url: urlSaved.originalUrl, short_url: urlSaved.short_url });
     }
 
     const counter = await db.collection("URL_Shortener_Microservice").findOneAndUpdate(
@@ -73,7 +73,7 @@ app.post("/api/shorturl", validateUrl, async (req, res) => {
     const newShortUrl = counter.seq;
     await db.collection("URL_Shortener_Microservice").insertOne({ originalUrl, short_url: newShortUrl });
 
-    res.json({ originalUrl, short_url: newShortUrl });
+    res.json({ original_url: originalUrl, short_url: newShortUrl });
   } catch (error) {
     if (error.code === 'ENOTFOUND') {
       return res.json({ error: "Invalid Hostname" });
