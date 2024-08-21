@@ -29,6 +29,10 @@ module.exports = function (app) {
       let project = req.params.project;
       const data = req.body;
 
+      if (!issueTitle || !issueText || !createdBy) {
+        res.json({ error: "Required field(s) missing" })
+        return;
+      }
       const dates = { created_on: new Date(), updated_on: new Date() };
       const doc = await collection.insertOne({
         ...data,

@@ -86,10 +86,6 @@
         const assignedTo = document.getElementById("assignedTo").value.trim();
         const statusText = document.getElementById("statusText").value.trim();
 
-        if (!issueTitle || !issueText || !createdBy) {
-          alert("Required field(s) missing");
-          return;
-        }
 
         const data = {
           issue_title: issueTitle,
