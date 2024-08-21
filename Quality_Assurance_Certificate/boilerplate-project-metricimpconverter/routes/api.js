@@ -12,13 +12,13 @@ module.exports = function (app) {
     let initUnit = convertHandler.getUnit(input);
 
     if (initNum === "invalid number" && initUnit === "invalid unit") {
-      return res.send("invalid number and unit");
+      return res.status(400).send("invalid number and unit");
     }
     if (initNum === "invalid number") {
-      return res.send("invalid number");
+      return res.status(400).send("invalid number");
     }
     if (initUnit === "invalid unit") {
-      return res.send("invalid unit");
+      return res.status(400).send("invalid unit");
     }
 
     let returnNum = convertHandler.convert(initNum, initUnit);
