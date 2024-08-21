@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metric-Imperial Converter</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen px-10 gap-12"
+  >
+    <div class="bg-gray-800 shadow-xl rounded-lg p-8 max-w-xl w-full">
+      <!-- Header Section -->
+      <h1 class="text-3xl font-bold mb-6 text-center text-white">
+        Metric-Imperial Converter
+      </h1>
+
+      <!-- Description Section -->
+
+      <!-- Form Section -->
+      <form id="converterForm" class="space-y-6">
+        <div>
+          <label
+            for="inputValue"
+            class="block text-sm font-medium text-gray-400"
+            >Enter value and unit</label
+          >
+          <input
+            type="text"
+            id="inputValue"
+            name="input"
+            class="mt-1 outline-none block w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            placeholder="e.g., 10lbs, 5.5km"
+          />
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Convert
+          </button>
+        </div>
+      </form>
+
+      <!-- Result Section -->
+      <div
+        id="result"
+        class="mt-8 text-center text-lg font-semibold text-gray-300"
+      ></div>
+
+      <!-- Address Bar Description Section -->
+      <div class="mt-10 text-gray-400 text-sm border-t border-gray-700 pt-4">
+        <p>
+          You can also perform conversions directly by entering the conversion
+          request in the browser's address bar. For example:
+        </p>
+        <code class="block bg-gray-700 px-3 py-2 rounded mt-2 text-yellow-300"
+          >/api/convert?input=10gal</code
+        >
+      </div>
+    </div>
+
+    <div class="mb-8 text-gray-300 bg-gray-800 p-5 rounded-lg leading-relaxed">
+      <p>
+        Convert between metric and imperial units by entering a value and
+        selecting a unit. Supported units are:
+      </p>
+      <ul class="list-disc list-inside ml-4 mt-2">
+        <li><strong>gal</strong> - Gallons (US) to Liters</li>
+        <li><strong>l</strong> - Liters to Gallons (US)</li>
+        <li><strong>lbs</strong> - Pounds to Kilograms</li>
+        <li><strong>kg</strong> - Kilograms to Pounds</li>
+        <li><strong>mi</strong> - Miles to Kilometers</li>
+        <li><strong>km</strong> - Kilometers to Miles</li>
+      </ul>
+    </div>
+
+    <script>
+      document
+        .getElementById("converterForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const inputValue = document.getElementById("inputValue").value.trim();
+          const resultDiv = document.getElementById("result");
+
+          if (!inputValue) {
+            resultDiv.textContent = "Please enter a value and unit.";
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              `/api/convert?input=${encodeURIComponent(inputValue)}`
+            );
+            const data = await response.json();
+
+            if (data.error) {
+              resultDiv.textContent = data.error;
+            } else {
+              resultDiv.textContent = `${data.initNum} ${data.initUnit} converts to ${data.returnNum} ${data.returnUnit}`;
+            }
+          } catch (error) {
+            resultDiv.textContent =
+              "Error processing the conversion. Please try again later.";
+          }
+        });
+    </script>
+  </body>
+</html>
