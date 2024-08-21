@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Issues for Project</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-8">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold">
+          Issues for Project:
+          <span id="projectName" class="text-blue-400"></span>
+        </h1>
+        <button
+          onclick="goBack()"
+          class="mt-4 bg-gray-800 hover:bg-gray-700 text-white p-2 rounded"
+        >
+          Back to Projects
+        </button>
+      </div>
+
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Create New Issue</h2>
+        <form id="issueForm" class="space-y-4">
+          <input
+            type="text"
+            id="issueTitle"
+            name="issueTitle"
+            placeholder="Issue Title"
+            class="w-full bg-gray-800 p-2 rounded focus:outline-none"
+          />
+          <textarea
+            id="issueText"
+            placeholder="Issue Text"
+            name="issueText"
+            class="w-full bg-gray-800 p-2 rounded focus:outline-none"
+          ></textarea>
+          <input
+            type="text"
+            id="createdBy"
+            name="createdBy"
+            placeholder="Created By"
+            class="w-full bg-gray-800 p-2 rounded focus:outline-none"
+          />
+          <input
+            type="text"
+            id="assignedTo"
+            name="assignedTo"
+            placeholder="Assigned To (Optional)"
+            class="w-full bg-gray-800 p-2 rounded focus:outline-none"
+          />
+          <input
+            type="text"
+            id="statusText"
+            name="statusText"
+            placeholder="Status Text (Optional)"
+            class="w-full bg-gray-800 p-2 rounded focus:outline-none"
+          />
+          <button
+            type="button"
+            onclick="createIssue()"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
+          >
+            Create Issue
+          </button>
+        </form>
+      </div>
+
+      <div id="issuesContainer" class="space-y-4 bg-gray-800">
+        <!-- Issues will be dynamically loaded here -->
+      </div>
+    </div>
+
+    <script>
+      async function createIssue() {
+        const projectName = document.getElementById("projectName").textContent;
+        const issueTitle = document.getElementById("issueTitle").value.trim();
+        const issueText = document.getElementById("issueText").value.trim();
+        const createdBy = document.getElementById("createdBy").value.trim();
+        const assignedTo = document.getElementById("assignedTo").value.trim();
+        const statusText = document.getElementById("statusText").value.trim();
+
+        if (!issueTitle || !issueText || !createdBy) {
+          alert("Required field(s) missing");
+          return;
+        }
+
+        const data = {
+          issue_title: issueTitle,
+          issue_text: issueText,
+          created_by: createdBy,
+          assigned_to: assignedTo,
+          status_text: statusText,
+        };
+
+        console.log(data);
+        const response = await fetch(`/api/issues/${projectName}`, {
+          method: "post",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const issue = await response.json();
+        displayIssue(issue);
+      }
+
+      function displayIssue(issue) {
+        const issueElement = document.createElement("div");
+        issueElement.className = "p-4 bg-gray-800 rounded shadow";
+
+        issueElement.innerHTML = `
+    <h2 class="text-xl font-bold"> ${issue._id} </h2>
+    <h3 class="text-lg font-bold">${issue.issue_title}</h3>
+    <p><strong>Description:</strong> ${issue.issue_text}</p>
+    <p><strong>Created by:</strong> ${issue.created_by}</p>
+    <p><strong>Assigned to:</strong> ${issue.assigned_to || "Unassigned"}</p>
+    <p><strong>Status:</strong> ${issue.status_text || "No status"}</p>
+    <p><strong>Created on:</strong> ${issue.created_on}</p>
+    <p><strong>Last updated:</strong> ${issue.updated_on}</p>
+  `;
+
+        document.getElementById("issuesContainer").appendChild(issueElement);
+      }
+
+      async function loadIssues(projectName) {
+        const response = await fetch(`/api/issues/${projectName}`);
+        const issues = await response.json();
+
+        const issuesContainer = document.getElementById("issuesContainer");
+        issuesContainer.innerHTML = ""; // Clear any existing issues
+
+        issues.forEach((issue) => {
+          displayIssue(issue);
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectName = urlParams.get("project");
+        document.getElementById("projectName").textContent = projectName;
+        loadIssues(projectName);
+      });
+
+      function goBack() {
+        window.location.href = "/";
+      }
+    </script>
+  </body>
+</html>
