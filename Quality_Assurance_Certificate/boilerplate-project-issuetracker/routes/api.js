@@ -22,7 +22,7 @@ module.exports = function (app) {
           // Convert boolean strings to actual boolean values
           if (value === 'true') value = true;
           if (value === 'false') value = false;
-          if(key === '_id') value = new ObjectId(value)
+          if (key === '_id') value = new ObjectId(value)
           filter[key] = value;
         }
       }
