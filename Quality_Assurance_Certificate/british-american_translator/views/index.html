@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Translator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-gray-200">
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="w-full max-w-xl p-6 bg-gray-800 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-blue-500 text-center mb-6">
+          Text Translator
+        </h1>
+
+        <!-- Input Area -->
+        <div class="mb-4">
+          <label
+            for="text-input"
+            class="block text-sm font-medium text-gray-300 mb-2"
+            >Enter Text to Translate:</label
+          >
+          <textarea
+            id="text-input"
+            rows="5"
+            name="textInput"
+            class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your text here..."
+          ></textarea>
+        </div>
+
+        <!-- Locale Selection -->
+        <div class="mb-6">
+          <label
+            for="locale"
+            class="block text-sm font-medium text-gray-300 mb-2"
+            >Select Locale:</label
+          >
+          <select
+            id="locale"
+            name="locale"
+            class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="american-to-british">American to British</option>
+            <option value="british-to-american">British to American</option>
+          </select>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-between">
+          <button
+            id="translate-button"
+            class="w-1/2 mr-2 p-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Translate
+          </button>
+          <button
+            id="clear-button"
+            class="w-1/2 ml-2 p-3 bg-gray-600 text-gray-300 font-bold rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            Clear
+          </button>
+        </div>
+
+        <!-- Output Area -->
+        <div
+          id="output"
+          class="mt-6 p-4 bg-gray-700 border border-gray-600 rounded-lg text-gray-300"
+        >
+          <p id="translation-result" class="whitespace-pre-line"></p>
+        </div>
+
+        <!-- Error Message -->
+        <div
+          id="error-message"
+          class="mt-4 text-red-500 text-center hidden"
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("translate-button")
+        .addEventListener("click", async () => {
+          const text = document.getElementById("text-input").value;
+          const locale = document.getElementById("locale").value;
+          const output = document.getElementById("translation-result");
+          const errorMessage = document.getElementById("error-message");
+
+          // Clear previous output and errors
+          output.innerHTML = "";
+          errorMessage.classList.add("hidden");
+
+          // Send POST request to /api/translate
+          try {
+            const response = await fetch("/api/translate", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ text, locale }),
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+              errorMessage.textContent = data.error;
+              errorMessage.classList.remove("hidden");
+            } else {
+              output.innerHTML =
+                data.translation || "Everything looks good to me!";
+            }
+          } catch (err) {
+            errorMessage.textContent =
+              "An error occurred while translating. Please try again.";
+            errorMessage.classList.remove("hidden");
+          }
+        });
+
+      document.getElementById("clear-button").addEventListener("click", () => {
+        document.getElementById("text-input").value = "";
+        document.getElementById("translation-result").innerHTML = "";
+        document.getElementById("error-message").classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
