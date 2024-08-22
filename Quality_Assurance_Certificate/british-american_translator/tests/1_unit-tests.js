@@ -168,4 +168,36 @@ suite('Unit Tests', () => {
     assert.equal(translation, expectedTranslation);
   });
 
+  test('Translate "She organised a fancy party." to American English', () => {
+    const text = "She organised a fancy party.";
+    const locale = "british-to-american";
+    const expectedTranslation = 'She <span class="highlight">organized</span> a fancy party.';
+    const { translation } = translator.translate(text, locale);
+    assert.equal(translation, expectedTranslation);
+  });
+  
+  test('Translate "I am travelling to the theatre." to American English', () => {
+    const text = "I am travelling to the theatre.";
+    const locale = "british-to-american";
+    const expectedTranslation = 'I am <span class="highlight">traveling</span> to the <span class="highlight">theater</span>.';
+    const { translation } = translator.translate(text, locale);
+    assert.equal(translation, expectedTranslation);
+  });
+  
+  test('Translate "My favourite colour is blue." to American English', () => {
+    const text = "My favourite colour is blue.";
+    const locale = "british-to-american";
+    const expectedTranslation = 'My <span class="highlight">favorite</span> <span class="highlight">color</span> is blue.';
+    const { translation } = translator.translate(text, locale);
+    assert.equal(translation, expectedTranslation);
+  });
+  
+  test('Translate "He is a very well-known defence lawyer." to American English', () => {
+    const text = "He is a very well-known defence lawyer.";
+    const locale = "british-to-american";
+    const expectedTranslation = 'He is a very well-known <span class="highlight">defense</span> lawyer.';
+    const { translation } = translator.translate(text, locale);
+    assert.equal(translation, expectedTranslation);
+  });
+  
 });
