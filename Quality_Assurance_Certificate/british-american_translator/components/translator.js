@@ -12,12 +12,12 @@ class Translator {
   }
 
   translate(text, locale) {
-    if (!text || !locale) {
-      return { error: "Required field(s) missing" };
+    if (text?.trim() === "") {
+      return { error: 'No text to translate' };
     }
 
-    if (text.trim() === "") {
-      return { error: "No text to translate" };
+    if (!text || !locale) {
+      return { error: "Required field(s) missing" };
     }
 
     if (!["american-to-british", "british-to-american"].includes(locale)) {
@@ -36,7 +36,7 @@ class Translator {
 
     if (translatedText === text) {
       return {
-        text: text,
+        text: translatedText,
         translation: "Everything looks good to me!",
       };
     }
@@ -47,56 +47,66 @@ class Translator {
   translateAmericanToBritish(text) {
     text = this.translateTime(text, "british");
     text = this.translateTitles(text, "british");
-    text = this.replaceWords(text, this.americanToBritishSpelling);
-    text = this.replaceWords(text, this.americanOnly);
+    text = this.replaceWords(text, this.americanToBritishSpelling, 'british');
+    text = this.replaceWords(text, this.americanOnly, 'british');
 
-    return this.wrapHighlights(text);
+    return text;
   }
 
   translateBritishToAmerican(text) {
     text = this.translateTime(text, "american");
     text = this.translateTitles(text, "american");
-    text = this.replaceWords(text, this.britishOnly);
-    text = this.replaceWords(text, this.americanToBritishSpelling);
+    text = this.replaceWordsBritishOnly(text, 'american');
+    text = this.replaceWords(text, this.americanToBritishSpelling, 'american');
 
-    return this.wrapHighlights(text);
+    return text;
   }
 
   translateTime(text, targetLocale) {
     const timeRegex = /(\d{1,2})[:.](\d{2})/g;
     return text.replace(timeRegex, (match, hours, minutes) => {
       return targetLocale === "american"
-        ? `${hours}:${minutes}`
-        : `${hours}.${minutes}`;
+        ? `<span class="highlight">${hours}:${minutes}</span>`
+        : `<span class="highlight">${hours}.${minutes}</span>`;
     });
   }
 
   translateTitles(text, targetLocale) {
     const titles = this.americanToBritishTitles;
     for (const [american, british] of Object.entries(titles)) {
-      const regex = new RegExp(`\\b${american}\\b`, "gi");
-      text = text.replace(regex, british);
+      
+      const regex = targetLocale === 'american' ? new RegExp(`${british}`, "gi") : new RegExp(`${american}`, "gi");
+
+      const locale = targetLocale === 'american' ? american : british
+
+      text = text.replace(regex, `<span class="highlight">${this.capitalizeFirstWord(locale)}</span>`);
     }
     return text;
   }
 
-  replaceWords(text, dictionary) {
+  replaceWords(text, dictionary, targetLocale) {
+
     for (const [american, british] of Object.entries(dictionary)) {
-      const regex = new RegExp(`\\b${american}\\b`, "gi");
-      text = text.replace(regex, `<span class="highlight">${british}</span>`);
+      const regex = targetLocale === 'american' ? new RegExp(`\\b${british}\\b`, "gi") : new RegExp(`\\b${american}\\b`, "gi");
+      text = text.replace(regex, `<span class="highlight">${targetLocale === 'american' ? american : british}</span>`);
+      
     }
     return text;
   }
 
-  wrapHighlights(text) {
-    return text.replace(
-      /<span class="highlight">(.*?)<\/span>/g,
-      (match, p1) => `<span class="highlight">${p1}</span>`
-    );
+  replaceWordsBritishOnly(text, targetLocale) {
+    for (const [american, british] of Object.entries(this.britishOnly)) {
+      // Create a regex that explicitly excludes text within <span class="highlight"> elements
+      const regex = new RegExp(`\\b${american}\\b(?![^<]*<\\/span>)`, "gi");
+  
+      text = text.replace(regex, `<span class="highlight">${targetLocale === 'american' ? british : american}</span>`);
+    }
+  
+    return text;
   }
 
-  capitalizeFirstWord(text) {
-    text = text.trim();
+  capitalizeFirstWord(text='') {
+    text = text.trim().replace('\\','');
 
     if (text.length === 0) {
       return "";
