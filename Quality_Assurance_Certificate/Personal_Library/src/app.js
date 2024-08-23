@@ -103,14 +103,5 @@ app.delete("/api/books/:_id?", async (req, res) => {
   }
 });
 
-app.get("/_api/get-tests", async (req, res) => {
-  res.json(
-    new Array(10).fill({
-      title: "ES6 module not supported in mocha and chai",
-      content:
-        "To run the test its ncessary to manually run npm test, and the tests will pass, It has been tested.",
-    })
-  );
-});
 
 export default app;
